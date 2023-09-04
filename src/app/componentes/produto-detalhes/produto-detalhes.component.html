@@ -1,0 +1,86 @@
+<!--
+  COMPONENTE: produto-detalhes.component.html
+-->
+<div *ngIf="viewMode; else editable">
+
+  <div *ngIf="produtoAtual.id">
+    <h4>Produto</h4>
+    <div>
+      <label><strong>Id:</strong></label> {{ produtoAtual.id }}
+    </div>
+    <div>
+      <label><strong>Nome:</strong></label> {{ produtoAtual.nome }}
+    </div>
+    <div>
+      <label><strong>Preço:</strong></label>
+      R$ {{ produtoAtual.preco }}
+    </div>
+
+    <button class="btn btn-warning"  routerLink="/produto/{{ produtoAtual.id }}" >
+      Editar
+    </button>
+
+  </div>
+
+  <div *ngIf="!produtoAtual">
+    <br />
+    <p>Por favor click em um Produto...</p>
+  </div>
+
+</div>
+
+
+<!-- TELA DE EDIÇÃO -->
+
+<ng-template #editable>
+
+  <div *ngIf="produtoAtual.id" class="edit-form">
+
+    <h4>Produto</h4>
+
+    <form>
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nome"
+          [(ngModel)]="produtoAtual.nome"
+          name="nome"
+        />
+      </div>
+      <div class="form-group">
+        <label for="preco">Preço</label>
+        <input
+          type="text"
+          class="form-control"
+          id="preco"
+          [(ngModel)]="produtoAtual.preco"
+          name="preco"
+        />
+      </div>
+
+    </form>
+
+
+    <button type="submit" class="btn btn-success"  (click)="atualizaProduto()">
+      Salvar
+    </button>
+
+    <button class="btn btn-secondary"  routerLink="/listaprodutos" >Cancelar</button>
+
+    <button class="btn btn-danger" (click)="apagaProduto()">
+      Apagar
+    </button>
+
+
+    <p>{{ mensagem }}</p>
+
+  </div>
+
+  <div *ngIf="!produtoAtual.id">
+    <br />
+    <p>Não foi possivel acessar este Produto...</p>
+  </div>
+
+</ng-template>

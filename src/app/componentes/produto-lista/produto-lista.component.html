@@ -1,0 +1,82 @@
+<!--
+  COMPONENTE: produto-lista.component.html
+-->
+<div class="list column">
+
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button" routerLink="/adiciona"
+        > Adicionar Produto </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-12">
+    <pagination-controls
+      previousLabel="Anterior"
+      nextLabel="Proximo"
+      [responsive]="true"
+      (pageChange)="handlePageChange($event)"
+    ></pagination-controls>
+  </div>
+
+  <h3>Lista de Produtos</h3>
+
+  <div class="list-p" >
+
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr
+          *ngFor="let produto of produtos | paginate : {
+
+            itemsPerPage: pageSize,
+            currentPage: page,
+            totalItems: count
+          };
+
+          let i = index "
+          [class.active]="i == indexAtual"
+          (click)="ativarProduto(produto, i) "
+        >
+          <th scope="row">{{produto.id}}</th>
+          <td>{{produto.nome}}</td>
+          <td>R$ {{produto.preco}}</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <div class="mt-3">
+      ...
+
+      Items por Pagina:
+      <select (change)="handlePageSizeChange($event)">
+        <option *ngFor="let size of pageSizes" [ngValue]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <hr>
+      <app-produto-detalhes [viewMode]="true" [produtoAtual]="produtoAtual">
+      </app-produto-detalhes>
+    </div>
+
+  </div>
+
+
+
+
+</div>

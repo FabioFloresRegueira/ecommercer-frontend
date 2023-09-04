@@ -1,0 +1,13 @@
+/*
+  PRODUTO-LISTA COMPOENENTE
+*/
+.list-p {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-content: center;
+  align-items: flex-start;
+  max-width: 1550px;
+  margin: auto;
+}
+
